@@ -71,8 +71,8 @@ int main(int argc, char **argp, char **envp)
             iprintf("ERROR: Failed to read sensor data\n");
         }
 
-        /* Simple delay */
-        for (volatile long i = 0; i < 10000000L; i++);
+        /* Delay ca. 2 Sekunden */
+        for (volatile long i = 0; i < 2000000L; i++);
     }
 
     oc_i2c_disable();
