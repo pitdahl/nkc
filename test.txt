@@ -1,2 +1,6 @@
 hallo,
 Test über ssh
+
+git add .
+git commit -m "Meine Änderungen"
+git push origin main
