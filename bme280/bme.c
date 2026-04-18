@@ -157,7 +157,14 @@ bool bme280_init(void)
         return false;
     }
 
+<<<<<<< HEAD
+    iprintf("GYBMEP Kombi-Sensor ID: 0x76\n");
+    iprintf("BME280 Sensor       ID: 0x%02X\n", id);
+    iprintf("BMP280 Sensor       ID: 0x58\n");
+    
+=======
     iprintf("BME280 Sensor ID: 0x%02X\n", id);
+>>>>>>> d55544c819019099ec79e8a3a517bbcc6d153a1b
 
     /* Configure humidity oversampling */
     bme_write8(BME280_REG_CTRL_HUM, 0x01);

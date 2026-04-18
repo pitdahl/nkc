@@ -87,4 +87,8 @@ bool bme280_read(bme280_data_t *p_data);
  */
 const bme280_calib_t* bme280_get_calib(void);
 
+<<<<<<< HEAD
 #endif
+=======
+#endif
+>>>>>>> d55544c819019099ec79e8a3a517bbcc6d153a1b
