@@ -19,7 +19,6 @@
 #include "i2c.h"
 #include "bme.h"
 
-<<<<<<< HEAD
 #define BUS_SPEED  40000
 #define I2C_SPEED  100
 #define I2CP_PRER(speed_khz) (BUS_SPEED/(5*speed_khz)-1)
@@ -52,31 +51,18 @@ void GDP_define_char(const uint8_t ch, const uint8_t* p_char) {
 int main(int argc, char **argp, char **envp)
 {
     /* ggf. auskommentieren falls Tastatur Probleme macht */
-=======
-#define BUS_SPEED  40000    /**< 40 MHz */
-#define I2C_SPEED  100      /**< 100 kHz */
-#define I2CP_PRER(speed_khz) (BUS_SPEED/(5*speed_khz)-1)
-
-int main(int argc, char **argp, char **envp)
-{
->>>>>>> d55544c819019099ec79e8a3a517bbcc6d153a1b
     DISABLE_CPU_INTERRUPTS;
 
     setvbuf(stdin, NULL, _IONBF, 0);
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
 
-<<<<<<< HEAD
     /*---------------------------------------------------------*/
     /* I2C initialisieren */
-=======
-    /* Initialize I2C Bus */
->>>>>>> d55544c819019099ec79e8a3a517bbcc6d153a1b
     uint16_t prescaler = I2CP_PRER(I2C_SPEED);
     oc_i2c_init(prescaler);
     iprintf("I2C Init done\n");
 
-<<<<<<< HEAD
     /*---------------------------------------------------------*/
     /* I2C Bus scannen */
     uint8_t found[10] = {0};
@@ -158,47 +144,5 @@ int main(int argc, char **argp, char **envp)
     oc_i2c_disable();
     GDP.ctrl2 &= ~(1u << 4u);
 
-=======
-    /* Scan for devices on I2C bus */
-    uint8_t found[10] = {0};
-    uint8_t found_cnt = 0;
-    oc_i2c_scan(found, sizeof(found), &found_cnt);
-    iprintf("Found %u devices on I2C bus\n", found_cnt);
-    for (uint8_t i = 0; i < found_cnt; i++) {
-        iprintf("  Device at Address: 0x%02X\n", found[i]);
-    }
-
-    /* Initialize BME280 sensor */
-    if (!bme280_init()) {
-        iprintf("ERROR: BME280 initialization failed\n");
-        oc_i2c_disable();
-        return 1;
-    }
-    iprintf("BME280 sensor initialized\n\n");
-
-    /* Main measurement loop */
-    while (1) {
-        bme280_data_t sensor_data;
-
-        if (bme280_read(&sensor_data)) {
-            int t_int = (int)sensor_data.temperature;
-            int t_dec = (int)((sensor_data.temperature - t_int) * 100);
-            int p_int = (int)sensor_data.pressure;
-            int p_dec = (int)((sensor_data.pressure - p_int) * 100);
-            int h_int = (int)sensor_data.humidity;
-            int h_dec = (int)((sensor_data.humidity - h_int) * 100);
-
-            iprintf("Temp: %d.%02d C | Druck: %d.%02d hPa | Feuchte: %d.%02d %%\n",
-                    t_int, t_dec, p_int, p_dec, h_int, h_dec);
-        } else {
-            iprintf("ERROR: Failed to read sensor data\n");
-        }
-
-        /* Delay ca. 2 Sekunden */
-        for (volatile long i = 0; i < 2000000L; i++);
-    }
-
-    oc_i2c_disable();
->>>>>>> d55544c819019099ec79e8a3a517bbcc6d153a1b
     return 0;
 }
